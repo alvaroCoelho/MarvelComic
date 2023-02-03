@@ -1,7 +1,7 @@
 package com.marvelcomic.di
 
-import alvaro.com.br.marvelappstarter.util.Constants
-import alvaro.com.br.marvelappstarter.util.Constants.BASE_URL
+import com.marvelcomic.util.Constants
+import com.marvelcomic.util.Constants.BASE_URL
 import com.marvelcomic.data.remote.ServiceApi
 import dagger.Module
 import dagger.Provides
