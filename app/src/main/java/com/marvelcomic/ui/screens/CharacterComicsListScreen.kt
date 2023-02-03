@@ -2,26 +2,46 @@ package com.marvelcomic.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.marvelcomic.R
 import com.marvelcomic.data.model.ThumbnailModel
 import com.marvelcomic.data.model.comic.ComicModel
+import com.marvelcomic.ui.viewModel.CharacterComicsListViewModel
+import com.marvelcomic.ui.viewModel.ResourceState
+import com.marvelcomic.util.Constants.COMIC
 
 
 @Composable
-fun CharacterComicsListScreen() {
+fun CharacterComicsListScreen(
+    characterId: Int,
+    navController: NavController,
+    viewModel: CharacterComicsListViewModel = hiltViewModel()
+) {
+
+    viewModel.fetch(characterId)
+    var currentState = viewModel.list.value
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -37,21 +57,14 @@ fun CharacterComicsListScreen() {
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = "Iron Man " + stringResource(R.string.comics),
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = colorResource(id = R.color.red_marvel)
-                )
-            }
-
-            Row(
-                modifier = Modifier
-                    .padding(20.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                ListComics()
+                when (currentState) {
+                    ResourceState.Empty -> ListAppsEmpty()
+                    is ResourceState.Success -> ListComics(
+                        listComics = currentState.allComics,
+                        navController
+                    )
+                    is ResourceState.Loading -> ListAppsLoading()
+                }
             }
 
         }
@@ -62,44 +75,7 @@ fun CharacterComicsListScreen() {
 }
 
 @Composable
-fun ListComics() {
-
-    val listComics = listOf(
-        ComicModel(
-            1, "comicName1", "Comic1",
-            ThumbnailModel("", "")
-        ),
-
-        ComicModel(
-            1, "comicName2", "Comic2",
-            ThumbnailModel("", "")
-        ),
-
-        ComicModel(
-            1, "comicName3", "Comic3",
-            ThumbnailModel("", "")
-        ),
-
-        ComicModel(
-            1, "comicName4", "Comic14",
-            ThumbnailModel("", "")
-        ),
-        ComicModel(
-            1, "comicName4", "Comic14",
-            ThumbnailModel("", "")
-        ), ComicModel(
-            1, "comicName4", "Comic14",
-            ThumbnailModel("", "")
-        ),
-        ComicModel(
-            1, "comicName4", "Comic14",
-            ThumbnailModel("", "")
-        ),
-        ComicModel(
-            1, "comicName4", "Comic14",
-            ThumbnailModel("", "")
-        )
-    )
+fun ListComics(listComics: List<ComicModel>, navController: NavController) {
 
     LazyColumn(
         modifier = Modifier
@@ -107,16 +83,29 @@ fun ListComics() {
             .fillMaxHeight()
             .background(colorResource(id = R.color.white_background_marvel))
     ) {
-
         items(listComics) { comic ->
-            ItemListComic(comic)
+
+            Card(
+                modifier = Modifier
+                    .padding(2.dp)
+                    .clickable {
+                        navController.currentBackStackEntry?.savedStateHandle?.set(COMIC, comic)
+                        navController.navigate(Destinations.ComicDetailsScreen.route)
+
+                    },
+                elevation = 10.dp,
+            ) {
+                ItemListComic(comic, navController)
+            }
+
+
         }
     }
 }
 
 
 @Composable
-fun ItemListComic(comic: ComicModel) {
+fun ItemListComic(comic: ComicModel, navController: NavController) {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
@@ -126,38 +115,73 @@ fun ItemListComic(comic: ComicModel) {
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.captain_america),
-                contentDescription = "",
+            AsyncImage(
                 modifier = Modifier
-                    .size(50.dp)
+                    .size(180.dp),
+                model = comic.thumbnailModel.path+"."+comic.thumbnailModel.extension,
+                contentDescription = null,
+                contentScale = ContentScale.Fit
             )
         }
 
         Row(modifier = Modifier.padding(5.dp)) {
-            Text(
-                text = comic.title,
-                fontWeight = FontWeight.Bold
-            )
+            comic.title?.let {
+                Text(
+                    text = it, fontWeight = FontWeight.Bold
+                )
+            }
         }
 
         Row(modifier = Modifier.padding(5.dp)) {
-            Text(
-                text = comic.descrition,
-                fontWeight = FontWeight.Bold
-            )
+            comic.descrition?.let {
+                Text(
+                    text = it, fontWeight = FontWeight.Bold
+                )
+            }
         }
     }
 
 
-/*    AsyncImage(
-        modifier = Modifier
-            .size(75.dp)
-            .padding(0.dp, 5.dp, 1.dp, 0.dp)
-            .clip(RoundedCornerShape(3.dp)),
-        model = "url",
-        contentDescription = null,
-        contentScale = ContentScale.Fit
-    )*/
 
+
+}
+
+
+@Composable
+fun ListAppsEmpty() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .padding(0.dp, 5.dp)
+            .background(Color.White)
+            .padding(0.dp, 100.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(R.string.empty),
+            textAlign = TextAlign.Center,
+            color = Color.Gray,
+            fontSize = 20.sp
+        )
+    }
+}
+
+@Composable
+fun ListAppsLoading() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .padding(0.dp, 5.dp)
+            .background(Color.White)
+    ) {
+
+
+        Text(
+            text = stringResource(R.string.loading),
+            color = Color.Gray,
+            fontSize = 20.sp
+        )
+    }
 }

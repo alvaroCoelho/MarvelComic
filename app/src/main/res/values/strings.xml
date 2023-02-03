@@ -3,4 +3,6 @@
     <string name="start">Start</string>
     <string name="choose_hero">Choose your hero</string>
     <string name="comics">Comics</string>
+    <string name="empty">Empty</string>
+    <string name="loading">Loading</string>
 </resources>

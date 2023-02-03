@@ -17,4 +17,12 @@ object Constants {
     const val CHARACTER_COMIC_LIST_SCREEN = "CHARACTER_COMIC_LIST_SCREEN"
     const val CHOICE_CHARACTER_SCREEN = "CHOICE_CHARACTER_SCREEN"
     const val COMIC_DETAILS_SCREEN = "COMIC_DETAILS_SCREEN"
+
+    const val CHARACTER_ID = "CHARACTER_ID"
+    const val COMIC = "COMIC"
+
+    const val CAPTAIN_AMERICA_ID = 1009220
+    const val HULK_ID = 1009351
+    const val IRON_MAN_ID = 1009368
+    const val THOR_iD = 1009664
 }

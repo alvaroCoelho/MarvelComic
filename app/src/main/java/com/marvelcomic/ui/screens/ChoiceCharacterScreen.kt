@@ -2,6 +2,7 @@ package com.marvelcomic.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,11 +14,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.marvelcomic.R
+import com.marvelcomic.ui.viewModel.CharacterComicsListViewModel
+import com.marvelcomic.util.Constants
 
 
 @Composable
-fun ChoiceHeroScreen() {
+fun ChoiceHeroScreen( navController: NavController) {
 
     Column(
         modifier = Modifier
@@ -53,6 +58,11 @@ fun ChoiceHeroScreen() {
                     contentDescription = "",
                     modifier = Modifier
                         .size(200.dp)
+                        .clickable {
+                            navController.currentBackStackEntry?.savedStateHandle?.
+                            set(Constants.CHARACTER_ID, Constants.CAPTAIN_AMERICA_ID)
+                            navController.navigate(Destinations.CharacterComicsListScreen.route)
+                        }
                 )
 
                 Image(
@@ -60,6 +70,12 @@ fun ChoiceHeroScreen() {
                     contentDescription = "",
                     modifier = Modifier
                         .size(200.dp)
+                        .clickable {
+                            navController.currentBackStackEntry?.savedStateHandle?.
+                            set(Constants.CHARACTER_ID, Constants.IRON_MAN_ID)
+                            navController.navigate(Destinations.CharacterComicsListScreen.route)
+
+                        }
                 )
             }
 
@@ -69,6 +85,12 @@ fun ChoiceHeroScreen() {
                     contentDescription = "",
                     modifier = Modifier
                         .size(200.dp)
+                        .clickable {
+                            navController.currentBackStackEntry?.savedStateHandle?.
+                            set(Constants.CHARACTER_ID, Constants.HULK_ID)
+                            navController.navigate(Destinations.CharacterComicsListScreen.route)
+
+                        }
                 )
 
                 Image(
@@ -76,6 +98,12 @@ fun ChoiceHeroScreen() {
                     contentDescription = "",
                     modifier = Modifier
                         .size(200.dp)
+                        .clickable {
+                            navController.currentBackStackEntry?.savedStateHandle?.
+                            set(Constants.CHARACTER_ID, Constants.THOR_iD)
+                            navController.navigate(Destinations.CharacterComicsListScreen.route)
+
+                        }
                 )
             }
 

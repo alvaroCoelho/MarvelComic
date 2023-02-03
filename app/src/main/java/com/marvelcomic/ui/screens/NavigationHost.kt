@@ -3,6 +3,7 @@ package com.marvelcomic.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,6 +17,7 @@ import com.marvelcomic.ui.screens.Destinations.StartScreen
 import com.marvelcomic.ui.screens.Destinations.CharacterComicsListScreen
 import com.marvelcomic.ui.screens.Destinations.ChoiceCharacterScreen
 import com.marvelcomic.ui.screens.Destinations.ComicDetailsScreen
+import com.marvelcomic.util.Constants.CHARACTER_ID
 
 
 @Composable
@@ -27,11 +29,17 @@ fun NavigationHost(navController: NavHostController, scope: CoroutineScope) {
         }
 
         composable(CharacterComicsListScreen.route){
-            CharacterComicsListScreen()
+            val comic = navController.previousBackStackEntry?.savedStateHandle?.get<Int>(
+                CHARACTER_ID)
+            comic?.let { CharacterComicsListScreen(
+                characterId = it,
+                navController = navController
+            ) }
+
         }
 
         composable(ChoiceCharacterScreen.route){
-            ChoiceHeroScreen()
+            ChoiceHeroScreen(navController)
         }
 
         composable(ComicDetailsScreen.route){
