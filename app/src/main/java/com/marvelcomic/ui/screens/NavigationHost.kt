@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.marvelcomic.data.model.comic.ComicModel
 import kotlinx.coroutines.CoroutineScope
 import com.marvelcomic.util.Constants.CHARACTER_COMIC_LIST_SCREEN
 import com.marvelcomic.util.Constants.CHOICE_CHARACTER_SCREEN
@@ -18,6 +19,7 @@ import com.marvelcomic.ui.screens.Destinations.CharacterComicsListScreen
 import com.marvelcomic.ui.screens.Destinations.ChoiceCharacterScreen
 import com.marvelcomic.ui.screens.Destinations.ComicDetailsScreen
 import com.marvelcomic.util.Constants.CHARACTER_ID
+import com.marvelcomic.util.Constants.COMIC
 
 
 @Composable
@@ -43,7 +45,9 @@ fun NavigationHost(navController: NavHostController, scope: CoroutineScope) {
         }
 
         composable(ComicDetailsScreen.route){
-            ComicDetaisScreen()
+            val comic = navController.previousBackStackEntry?.savedStateHandle?.get<ComicModel>(
+                COMIC)
+            comic?.let { ComicDetaisScreen(it) }
         }
 
     }

@@ -94,7 +94,7 @@ fun ListComics(listComics: List<ComicModel>, navController: NavController) {
                     },
                 elevation = 10.dp,
             ) {
-                ItemListComic(comic, navController)
+                ItemListComic(comic)
             }
 
 
@@ -104,7 +104,7 @@ fun ListComics(listComics: List<ComicModel>, navController: NavController) {
 
 
 @Composable
-fun ItemListComic(comic: ComicModel, navController: NavController) {
+fun ItemListComic(comic: ComicModel) {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
 

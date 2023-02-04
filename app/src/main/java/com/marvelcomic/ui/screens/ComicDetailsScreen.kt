@@ -7,15 +7,18 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.marvelcomic.R
+import com.marvelcomic.data.model.comic.ComicModel
 
 
 @Composable
-fun ComicDetaisScreen(){
+fun ComicDetaisScreen(comic: ComicModel){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -32,28 +35,31 @@ fun ComicDetaisScreen(){
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.captain_america),
-                    contentDescription = "",
+                AsyncImage(
                     modifier = Modifier
-                        .size(50.dp)
+                        .size(180.dp),
+                    model = comic.thumbnailModel.path+"."+comic.thumbnailModel.extension,
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit
                 )
             }
 
             Row(modifier = Modifier.padding(5.dp)) {
-                Text(
-                    text = "titulo",
-                    fontWeight = FontWeight.Bold
-                )
+                comic.title?.let {
+                    Text(
+                        text = it,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
 
             Row(modifier = Modifier.padding(15.dp,5.dp,15.dp,5.dp)) {
-                Text(
-                    text = "Descricao Descricao Descricao Descricao Descricao Descricao " +
-                            "Descricao Descricao Descricao Descricao Descricao Descricao Descricao " +
-                            "Descricao Descricao Descricao Descricao Descricao Descricao ",
-                    fontWeight = FontWeight.Bold
-                )
+                comic.descrition?.let {
+                    Text(
+                        text = it,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
         }
         }
