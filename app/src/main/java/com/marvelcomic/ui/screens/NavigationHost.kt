@@ -13,11 +13,10 @@ import com.marvelcomic.util.Constants.CHOICE_CHARACTER_SCREEN
 import com.marvelcomic.util.Constants.COMIC
 import com.marvelcomic.util.Constants.COMIC_DETAILS_SCREEN
 import com.marvelcomic.util.Constants.START_SCREEN
-import kotlinx.coroutines.CoroutineScope
 
 
 @Composable
-fun NavigationHost(navController: NavHostController, scope: CoroutineScope) {
+fun NavigationHost(navController: NavHostController) {
 
     NavHost(navController = navController, startDestination = StartScreen.route) {
         composable(StartScreen.route) {
