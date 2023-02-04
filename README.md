@@ -21,7 +21,7 @@ AsyncImage -  is a composable that executes an image request asynchronously and 
 Timber - This is a logger with a small, extensible API which provides utility on top of Android's normal Log class.
 
 unit tests
-= Improved interfaces
+- Improved interfaces
 - Unit test
 
 below the apk for installation:
