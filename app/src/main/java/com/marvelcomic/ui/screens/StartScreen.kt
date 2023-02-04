@@ -20,7 +20,7 @@ import com.marvelcomic.R
 
 
 @Composable
-fun StartScreen(navHostController : NavHostController){
+fun StartScreen(navHostController: NavHostController) {
 
     Column(
         modifier = Modifier
@@ -39,24 +39,26 @@ fun StartScreen(navHostController : NavHostController){
         }
 
         Row {
-            Button( modifier = Modifier
+            Button(modifier = Modifier
                 .height(50.dp)
                 .width(200.dp),
                 colors = ButtonDefaults.buttonColors(
-                backgroundColor = colorResource(id = R.color.red_marvel),
-                contentColor = Color.White,
+                    backgroundColor = colorResource(id = R.color.red_marvel),
+                    contentColor = Color.White,
                 ),
                 onClick = {
                     navHostController.navigate(Destinations.ChoiceCharacterScreen.route)
                 }) {
-                Text(text = stringResource(id = R.string.start),
-                fontSize = 24.sp)
+                Text(
+                    text = stringResource(id = R.string.start),
+                    fontSize = 24.sp
+                )
 
             }
 
         }
 
     }
-    
-    
+
+
 }

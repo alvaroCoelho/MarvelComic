@@ -18,10 +18,8 @@ import javax.inject.Inject
 class CharacterComicsListViewModel @Inject constructor(
     private val getComicsUseCase: GetComicsUseCase
 ) : ViewModel() {
-    var characterId: Int = 0
     private val _list: MutableState<ResourceState> = mutableStateOf(ResourceState.Loading)
     val list: State<ResourceState> = _list
-
 
 
     fun fetch(characterId: Int) = viewModelScope.launch {

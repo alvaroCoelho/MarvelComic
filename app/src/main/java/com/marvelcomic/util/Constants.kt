@@ -10,9 +10,6 @@ object Constants {
     const val HASH = "hash"
     const val TS = "ts"
 
-    const val LAST_SEARCH_QUERY = "last_search_query"
-    const val DEFAULT_QUERY = ""
-
     const val START_SCREEN = "START_SCREEN"
     const val CHARACTER_COMIC_LIST_SCREEN = "CHARACTER_COMIC_LIST_SCREEN"
     const val CHOICE_CHARACTER_SCREEN = "CHOICE_CHARACTER_SCREEN"

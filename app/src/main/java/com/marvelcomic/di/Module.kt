@@ -1,8 +1,8 @@
 package com.marvelcomic.di
 
+import com.marvelcomic.data.remote.ServiceApi
 import com.marvelcomic.util.Constants
 import com.marvelcomic.util.Constants.BASE_URL
-import com.marvelcomic.data.remote.ServiceApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -63,6 +63,7 @@ object Module {
             .build()
 
     }
+
     @Provides
     @Singleton
     fun provideServiceApi(retrofit: Retrofit): ServiceApi {

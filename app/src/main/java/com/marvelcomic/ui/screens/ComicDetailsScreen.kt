@@ -1,6 +1,5 @@
 package com.marvelcomic.ui.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
@@ -9,7 +8,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -18,7 +16,7 @@ import com.marvelcomic.data.model.comic.ComicModel
 
 
 @Composable
-fun ComicDetaisScreen(comic: ComicModel){
+fun ComicDetaisScreen(comic: ComicModel) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -38,7 +36,7 @@ fun ComicDetaisScreen(comic: ComicModel){
                 AsyncImage(
                     modifier = Modifier
                         .size(180.dp),
-                    model = comic.thumbnailModel.path+"."+comic.thumbnailModel.extension,
+                    model = comic.thumbnailModel.path + "." + comic.thumbnailModel.extension,
                     contentDescription = null,
                     contentScale = ContentScale.Fit
                 )
@@ -53,7 +51,7 @@ fun ComicDetaisScreen(comic: ComicModel){
                 }
             }
 
-            Row(modifier = Modifier.padding(15.dp,5.dp,15.dp,5.dp)) {
+            Row(modifier = Modifier.padding(15.dp, 5.dp, 15.dp, 5.dp)) {
                 comic.descrition?.let {
                     Text(
                         text = it,
@@ -62,6 +60,6 @@ fun ComicDetaisScreen(comic: ComicModel){
                 }
             }
         }
-        }
-
     }
+
+}

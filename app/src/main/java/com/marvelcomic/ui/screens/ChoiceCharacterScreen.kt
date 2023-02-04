@@ -14,15 +14,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.marvelcomic.R
-import com.marvelcomic.ui.viewModel.CharacterComicsListViewModel
 import com.marvelcomic.util.Constants
 
 
 @Composable
-fun ChoiceHeroScreen( navController: NavController) {
+fun ChoiceHeroScreen(navController: NavController) {
 
     Column(
         modifier = Modifier
@@ -59,8 +57,10 @@ fun ChoiceHeroScreen( navController: NavController) {
                     modifier = Modifier
                         .size(200.dp)
                         .clickable {
-                            navController.currentBackStackEntry?.savedStateHandle?.
-                            set(Constants.CHARACTER_ID, Constants.CAPTAIN_AMERICA_ID)
+                            navController.currentBackStackEntry?.savedStateHandle?.set(
+                                Constants.CHARACTER_ID,
+                                Constants.CAPTAIN_AMERICA_ID
+                            )
                             navController.navigate(Destinations.CharacterComicsListScreen.route)
                         }
                 )
@@ -71,8 +71,10 @@ fun ChoiceHeroScreen( navController: NavController) {
                     modifier = Modifier
                         .size(200.dp)
                         .clickable {
-                            navController.currentBackStackEntry?.savedStateHandle?.
-                            set(Constants.CHARACTER_ID, Constants.IRON_MAN_ID)
+                            navController.currentBackStackEntry?.savedStateHandle?.set(
+                                Constants.CHARACTER_ID,
+                                Constants.IRON_MAN_ID
+                            )
                             navController.navigate(Destinations.CharacterComicsListScreen.route)
 
                         }
@@ -86,8 +88,10 @@ fun ChoiceHeroScreen( navController: NavController) {
                     modifier = Modifier
                         .size(200.dp)
                         .clickable {
-                            navController.currentBackStackEntry?.savedStateHandle?.
-                            set(Constants.CHARACTER_ID, Constants.HULK_ID)
+                            navController.currentBackStackEntry?.savedStateHandle?.set(
+                                Constants.CHARACTER_ID,
+                                Constants.HULK_ID
+                            )
                             navController.navigate(Destinations.CharacterComicsListScreen.route)
 
                         }
@@ -99,8 +103,10 @@ fun ChoiceHeroScreen( navController: NavController) {
                     modifier = Modifier
                         .size(200.dp)
                         .clickable {
-                            navController.currentBackStackEntry?.savedStateHandle?.
-                            set(Constants.CHARACTER_ID, Constants.THOR_iD)
+                            navController.currentBackStackEntry?.savedStateHandle?.set(
+                                Constants.CHARACTER_ID,
+                                Constants.THOR_iD
+                            )
                             navController.navigate(Destinations.CharacterComicsListScreen.route)
 
                         }

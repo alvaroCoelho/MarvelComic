@@ -36,11 +36,11 @@ fun CharacterComicsListScreen(
     viewModel: CharacterComicsListViewModel = hiltViewModel()
 ) {
 
-    LaunchedEffect(key1 = characterId){
+    LaunchedEffect(key1 = characterId) {
         viewModel.fetch(characterId)
     }
 
-    var currentState = viewModel.list.value
+    val currentState = viewModel.list.value
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -117,7 +117,7 @@ fun ItemListComic(comic: ComicModel) {
             AsyncImage(
                 modifier = Modifier
                     .size(180.dp),
-                model = comic.thumbnailModel.path+"."+comic.thumbnailModel.extension,
+                model = comic.thumbnailModel.path + "." + comic.thumbnailModel.extension,
                 contentDescription = null,
                 contentScale = ContentScale.Fit
             )
@@ -139,8 +139,6 @@ fun ItemListComic(comic: ComicModel) {
             }
         }
     }
-
-
 
 
 }

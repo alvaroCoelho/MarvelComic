@@ -6,11 +6,11 @@ import java.io.Serializable
 
 data class ComicModel(
     @SerializedName("id")
-    val id:Int,
+    val id: Int,
     @SerializedName("title")
-    val title:String?,
+    val title: String?,
     @SerializedName("description")
-    val descrition:String?,
+    val descrition: String?,
     @SerializedName("thumbnail")
     val thumbnailModel: ThumbnailModel
-):Serializable
+) : Serializable
